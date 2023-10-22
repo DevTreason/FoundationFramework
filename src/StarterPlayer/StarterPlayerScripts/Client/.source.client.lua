@@ -5,6 +5,7 @@ local Players = game:GetService("Players")
 --/ Modules /--
 local Modules = {}
 for _, module in pairs(script:GetChildren()) do
+    if module:IsA("PackageLink") then continue end
     Modules[module.Name] = require(module)
 end
 

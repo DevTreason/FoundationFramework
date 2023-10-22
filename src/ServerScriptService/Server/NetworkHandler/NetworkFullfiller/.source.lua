@@ -1,3 +1,5 @@
+local module = {}
+
 --/ Services /--
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -6,7 +8,6 @@ local Players = game:GetService("Players")
 --/ Modules /--
 local Modules = {}
 for _, module in pairs(script:GetChildren()) do
-    if module:IsA("PackageLink") then continue end
     Modules[module.Name] = require(module)
 end
 
@@ -17,9 +18,13 @@ end
 
 
 --/ Public Functions /--
-for name, module in pairs(Modules) do
-    if module.Start then
-        print("[S-TFG BOOTSTRAPPER] Starting module " .. name)
-        module:Start()
+function module.OnServerEvent(player, event, ...)
+    -- Find the module with string.match
+    for name, module in pairs(Modules) do
+        if string.find(name, event.Name) then
+            module:OnServerEvent(player, event, ...)
+        end
     end
 end
+
+return module

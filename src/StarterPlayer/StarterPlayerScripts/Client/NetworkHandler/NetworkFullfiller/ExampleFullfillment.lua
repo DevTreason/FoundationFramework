@@ -12,14 +12,14 @@ for _, module in pairs(script:GetChildren()) do
 end
 
 --/ Private Variables /--
-
+local player = Players.LocalPlayer
 
 --/ Private Functions /--
 
 
 --/ Public Functions /--
-function module:Start()
-    
+function module:OnClientEvent(event, ...)
+    print("Event " .. event.Name .. " was fired by " .. player.Name.. " with arguments: ", ...)
 end
 
 return module
