@@ -19,7 +19,7 @@ local player = Players.LocalPlayer
 
 --/ Public Functions /--
 function module:OnClientEvent(event, ...)
-    print("Event " .. event.Name .. " was fired by " .. player.Name.. " with arguments: ", ...)
+    -- Implement Client Logic here
 end
 
 return module
