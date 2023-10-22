@@ -19,7 +19,7 @@ end
 
 --/ Public Functions /--
 function module:OnServerEvent(player, event, ...)
-    print("Event " .. event.Name .. " was fired by " .. player.Name.. " with arguments: ", ...)
+    -- Implement Server Logic here
 end
 
 return module
