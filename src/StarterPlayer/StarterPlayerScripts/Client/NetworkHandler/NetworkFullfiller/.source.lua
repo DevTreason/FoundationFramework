@@ -21,7 +21,6 @@ local player = Players.LocalPlayer
 function module.OnClientEvent(event, ...)
     local Data = {...}
     local RealName = Data[2]["RealName"]
-    -- Find the module with string.match
     for name, module in pairs(Modules) do
         if string.find(name, RealName) then
             module:OnClientEvent(event, Data)
