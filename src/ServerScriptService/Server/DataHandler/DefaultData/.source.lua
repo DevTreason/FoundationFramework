@@ -7,5 +7,6 @@ return {
     ["Money"] = 0,
     ["Codes"] = Modules.Codes,
     ["Settings"] = Modules.Settings,
-    ["Inventory"] = Modules.Inventory
+    ["Inventory"] = Modules.Inventory,
+    ["Quests"] = Modules.Quests
 }

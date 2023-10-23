@@ -15,7 +15,6 @@ end
 local Network = ReplicatedStorage:WaitForChild("Network")
 local NetworkIndex = Network:GetChildren()
 
-
 --/ Private Functions /--
 
 
@@ -40,15 +39,18 @@ end
 
 function module:Start()
     module.InvokedListener()
-    Players.PlayerAdded:Connect(function(player)
-        module.InvokeClient(player, "Example", {
-            ["RealName"] = "Example",
-            ["Data"] = {
-                ["Health"] = 50,
-                ["Money"] = 25
-            }
-        })
-    end)
 end
 
 return module
+
+--[[ Example of Client Invoke
+        Players.PlayerAdded:Connect(function(player)
+            module.InvokeClient(player, "Example", {
+                ["RealName"] = "Example",
+                ["Data"] = {
+                    ["Health"] = 50,
+                    ["Money"] = 25
+                }
+            })
+        end)
+]]

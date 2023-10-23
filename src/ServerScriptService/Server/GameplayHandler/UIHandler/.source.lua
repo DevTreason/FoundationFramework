@@ -19,7 +19,12 @@ end
 
 --/ Public Functions /--
 function module:Start()
-    
+    for name, module in pairs(Modules) do
+        if module.Start then
+            print("[S-TFG BOOTSTRAPPER] Starting module "..name)
+            module:Start()
+        end
+    end
 end
 
 return module

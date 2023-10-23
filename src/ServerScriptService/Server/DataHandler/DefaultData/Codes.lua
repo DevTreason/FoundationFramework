@@ -4,12 +4,20 @@ return {
         ["CLAIMED"] = false,
         ["REWARDS"] = {
             ["Money"] = 100,
-            ["Inventory"] = {
-                ["ITEM"] = {
-                    ["OWNED"] = true,
-                    ["COST"] = 0,
-                },
-            },
+        }
+    },
+    ["TEST"] = {
+        ["ACTIVE"] = true,
+        ["CLAIMED"] = false,
+        ["REWARDS"] = {
+            ["Money"] = 100,
+        }
+    },
+    ["TEST2"] = {
+        ["ACTIVE"] = false,
+        ["CLAIMED"] = false,
+        ["REWARDS"] = {
+            ["Money"] = 100,
         }
     }
 }

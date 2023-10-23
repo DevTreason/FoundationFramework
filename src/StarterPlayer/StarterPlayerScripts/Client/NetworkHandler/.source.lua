@@ -60,6 +60,12 @@ end
 function module:Start()
     module.InvokedListener()
     ObfuscateNetwork()
+    while task.wait(1) do
+        module.InvokeServer("TryQuest", {
+            ["PROGRESS_TYPE"] = "REACH",
+            ["AMOUNT"] = true
+        })
+    end
 end
 
 return module

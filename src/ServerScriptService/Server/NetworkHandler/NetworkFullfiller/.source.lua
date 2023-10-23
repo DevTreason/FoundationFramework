@@ -22,6 +22,7 @@ function module.OnServerEvent(player, event, ...)
     -- Find the module with string.match
     for name, module in pairs(Modules) do
         if string.find(name, event.Name) then
+            
             module:OnServerEvent(player, event, ...)
         end
     end
