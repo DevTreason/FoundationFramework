@@ -40,7 +40,6 @@ function module:OnServerEvent(player, event, ...)
                 QUEST_REQUIREMENTS = QuestData.QUESTREQUIREMENTS
             else
                 continue
-                
             end
             local AmountOfQuests = #QUEST_REQUIREMENTS
             local AmountOfCompletedQuests = 0
