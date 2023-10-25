@@ -22,7 +22,7 @@ local function ButtonListener()
     local Buttons = MainUI.ButtonFrame:GetChildren()
     local Blur = Lighting:FindFirstChild("Blur")
     for _, ButtonFrame in pairs(Buttons) do
-        if ButtonFrame:IsA("UIListLayout") then continue end
+        if not ButtonFrame:IsA("Frame") then continue end
         ButtonFrame.Button.MouseButton1Click:Connect(function()
             local FrameToOpen = ButtonFrame.Name
             MainUI[FrameToOpen].Visible = not MainUI[FrameToOpen].Visible
@@ -48,7 +48,7 @@ end
 local function ButtonHoverEffect()
     local Buttons = MainUI.ButtonFrame:GetChildren()
     for _, ButtonFrame in pairs(Buttons) do
-        if ButtonFrame:IsA("UIListLayout") then continue end
+        if not ButtonFrame:IsA("Frame") then continue end
         ButtonFrame.Button.MouseEnter:Connect(function()
             local Tween = TweenService:Create(ButtonFrame, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(255, 0, 0), Size = UDim2.new(1.2, 0, .2, 0)})
             Tween:Play()
