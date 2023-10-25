@@ -78,7 +78,7 @@ function module:OnServerEvent(player, event, ...)
     end
 
     for _, Quest in ipairs(QuestList:GetChildren()) do
-        if Quest:IsA("UIListLayout") or Quest:IsA("UIPadding") then continue end
+        if not Quest:IsA("Frame") then continue end
         local QuestName = Quest.QuestName.QuestName.Text
         if string.match(QuestName, "???") then continue end
         local QuestData = Quests[QuestName]
