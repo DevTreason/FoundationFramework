@@ -6,6 +6,7 @@ end
 return {
     ["Money"] = 0,
     ["Level"] = 1,
+    ["Experience"] = 0,
     ["Codes"] = Modules.Codes,
     ["Settings"] = Modules.Settings,
     ["Inventory"] = Modules.Inventory,
