@@ -22,16 +22,25 @@ end
 local MinimumExperience = 100
 
 --/ Private Functions /--
-local function GetRequiredExperience(LEVEL)
+
+--/ Public Functions /--
+function module.GetRequiredExperience(LEVEL)
     return ( LEVEL^2 ) * MinimumExperience * 0.5 + LEVEL * MinimumExperience + MinimumExperience
 end
 
---/ Public Functions /--
+function module.UpdatePlayersExperience(PLAYER, AMOUNT)
+    local PLAYER_LEVEL = Modules.DataHandler.GetDataOfSpecificType(PLAYER, "LEVEL")
+    local PLAYER_EXPERIENCE = Modules.DataHandler.GetDataOfSpecificType(PLAYER, "EXPERIENCE")
+    local REQUIRED_EXPERIENCE = module.GetRequiredExperience(PLAYER_LEVEL)
+    Modules.DataHandler.UpdateDataOfSpecificType(PLAYER, "EXPERIENCE", AMOUNT)
+    if PLAYER_EXPERIENCE + AMOUNT >= REQUIRED_EXPERIENCE then
+        Modules.DataHandler.UpdateDataOfSpecificType(PLAYER, "LEVEL", 1)
+        Modules.DataHandler.UpdateDataOfSpecificType(PLAYER, "EXPERIENCE", PLAYER_EXPERIENCE + AMOUNT - REQUIRED_EXPERIENCE)
+    end
+end
+
 function module:Start()
-    Players.PlayerAdded:Connect(function(player)
-        local PLAYER_LEVEL = Modules.DataHandler.GetDataOfSpecificType(player, "Level")
-        local EXP = GetRequiredExperience(PLAYER_LEVEL)
-    end)
+
 end
 
 return module
