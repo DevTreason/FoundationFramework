@@ -1,5 +1,7 @@
 local module = {}
 
+module.Modules = {}
+
 --/ Services /--
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -24,6 +26,7 @@ function module:Start()
             print("[S-TFG BOOTSTRAPPER] Starting module "..name)
             module:Start()
         end
+        self.Modules[name] = module
     end
 end
 
