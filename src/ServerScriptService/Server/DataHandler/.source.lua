@@ -51,6 +51,7 @@ function module.GetProfile(player)
 end
 
 function module.GetDataOfSpecificType(player, dataType)
+    repeat task.wait() until Profiles[player]
     local Profile = Profiles[player]
     if Profile then
         return Profile.Data[dataType]
@@ -76,9 +77,6 @@ end
 function module:Start()
     Players.PlayerAdded:Connect(PlayerAdded)
     Players.PlayerRemoving:Connect(PlayerRemoving)
-    for _, player in pairs(Players:GetPlayers()) do
-        coroutine.wrap(PlayerAdded)(player)
-    end
 end
 
 
