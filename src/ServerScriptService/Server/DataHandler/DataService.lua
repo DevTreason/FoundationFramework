@@ -25,7 +25,6 @@ local Profiles = {}
 
 --/ Private Functions /--
 local function PlayerAdded(player)
-    print("Player loaded, waiting for profile to load...", player.Name)
     local Profile = ProfileStore:LoadProfileAsync(Prefix..player.UserId)
     if Profile ~= nil then
         Profile:AddUserId(player.UserId)

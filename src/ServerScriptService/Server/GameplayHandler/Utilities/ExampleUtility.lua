@@ -12,7 +12,7 @@ local Server = ServerScriptService.Server
 --/ Modules /--
 local Modules = {
     ["CoreModules"] = {
-        ["DataHandler"] = require(Server.DataHandler),
+        ["DataService"] = require(Server.DataHandler.DataService),
     },
 }
 

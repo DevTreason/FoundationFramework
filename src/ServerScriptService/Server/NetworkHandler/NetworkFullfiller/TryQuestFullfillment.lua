@@ -13,9 +13,7 @@ local Server = ServerScriptService.Server
 local Modules = {
     ["CoreModules"] = {
         ["DataService"] = require(Server.DataHandler.DataService),
-        ["Utilities"] = {
-            ["RequestProfile"] = require(Server.GameplayHandler.Utilities.RequestProfile),
-        },
+        ["Utilities"] = {},
     },
 }
 

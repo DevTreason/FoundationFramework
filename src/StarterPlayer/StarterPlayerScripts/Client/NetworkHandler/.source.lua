@@ -14,7 +14,8 @@ end
 
 --/ Private Variables /--
 local Player = Players.LocalPlayer
-local Network = ReplicatedStorage:WaitForChild("Network")
+local FoundationFramework = ReplicatedStorage:WaitForChild("FoundationFramework")
+local Network = FoundationFramework:WaitForChild("Network")
 local NetworkIndex = Network:GetChildren()
 local StoredNetwork = {}
 for _, event in pairs(NetworkIndex) do

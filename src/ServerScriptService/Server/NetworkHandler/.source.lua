@@ -12,7 +12,8 @@ for _, module in pairs(script:GetChildren()) do
 end
 
 --/ Private Variables /--
-local Network = ReplicatedStorage:WaitForChild("Network")
+local FoundationFramework = ReplicatedStorage:WaitForChild("FoundationFramework")
+local Network = FoundationFramework:WaitForChild("Network")
 local NetworkIndex = Network:GetChildren()
 
 --/ Private Functions /--

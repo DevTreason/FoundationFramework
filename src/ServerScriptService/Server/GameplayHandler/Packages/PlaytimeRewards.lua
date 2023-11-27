@@ -6,12 +6,22 @@ module.Enabled = false
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local ServerScriptService = game:GetService("ServerScriptService")
+
+--/ Variables /--
+local Server = ServerScriptService.Server
+local FoundationFramework = ReplicatedStorage:WaitForChild("FoundationFramework")
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
-end
+local Modules = {
+    ["CoreModules"] = {
+        ["DataService"] = require(Server.DataHandler.DataService),
+    },
+    ["Utilities"] = {
+        ["RandomUtility"] = require(FoundationFramework.Utilities.RandomUtility),
+    }
+
+}
 
 --/ Private Variables /--
 
