@@ -9,7 +9,10 @@ local Players = game:GetService("Players")
 
 --/ Modules /--
 local Modules = {}
-for _, module in pairs(script:GetChildren()) do
+for _, module in script.Packages:GetChildren() do
+    Modules[module.Name] = require(module)
+end
+for _, module in script.UI:GetChildren() do
     Modules[module.Name] = require(module)
 end
 
@@ -21,6 +24,7 @@ end
 
 --/ Public Functions /--
 function module:Start()
+    print(Modules)
     for name, module in pairs(Modules) do
         if module.Start then
             print("[S-TFG BOOTSTRAPPER] Starting module "..name)
