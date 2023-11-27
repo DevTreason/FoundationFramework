@@ -4,19 +4,20 @@ local module = {}
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local ServerScriptService = game:GetService("ServerScriptService")
+
+--/ Variables /--
+local Server = ServerScriptService.Server
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
-end
-
-for _, global in pairs(script.Parent.Parent.Parent:GetChildren()) do
-    if global:IsA("PackageLink") then continue end
-    if global.Name == "GameplayHandler" then continue end
-    if global.Name == script.Parent.Parent.Name then continue end
-    Modules[global.Name] = require(global)
-end
+local Modules = {
+    ["CoreModules"] = {
+        ["DataService"] = require(Server.DataHandler.DataService),
+        ["Utilities"] = {
+            ["RequestProfile"] = require(Server.GameplayHandler.Utilities.RequestProfile),
+        },
+    },
+}
 
 --/ Private Variables /--
 
@@ -27,7 +28,7 @@ end
 --/ Public Functions /--
 function module:OnServerEvent(player, event, ...)
     local Data = {...}
-    local Profile = Modules.DataHandler.GetProfile(player)
+    local Profile = Modules.CoreModules.DataService.GetProfile(player)
     local Quests = Profile.Data.Quests
     local MainUI = player.PlayerGui:WaitForChild("MainUI")
     local QuestUI = MainUI:WaitForChild("Quests")
@@ -109,7 +110,7 @@ function module:OnServerEvent(player, event, ...)
             if not QuestData.REWARDS_CLAIMED then
                 QuestData.REWARDS_CLAIMED = true
                 for RewardName, Reward in pairs(QuestData.REWARDS) do
-                    Modules.DataHandler.UpdateDataOfSpecificType(player, RewardName, {nil, nil, Reward})
+                    Modules.CoreModules.DataService.UpdateDataOfSpecificType(player, RewardName, {nil, nil, Reward})
                 end
             end
         end

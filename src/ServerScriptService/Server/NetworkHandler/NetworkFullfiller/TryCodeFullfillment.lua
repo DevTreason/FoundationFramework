@@ -4,19 +4,20 @@ local module = {}
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local ServerScriptService = game:GetService("ServerScriptService")
+
+--/ Variables /--
+local Server = ServerScriptService.Server
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
-end
-
-for _, global in pairs(script.Parent.Parent.Parent:GetChildren()) do
-    if global:IsA("PackageLink") then continue end
-    if global.Name == "GameplayHandler" then continue end
-    if global.Name == script.Parent.Parent.Name then continue end
-    Modules[global.Name] = require(global)
-end
+local Modules = {
+    ["CoreModules"] = {
+        ["DataService"] = require(Server.DataHandler.DataService),
+        ["Utilities"] = {
+            ["RequestProfile"] = require(Server.GameplayHandler.Utilities.RequestProfile),
+        },
+    },
+}
 
 --/ Private Variables /--
 
@@ -30,7 +31,7 @@ function module:OnServerEvent(player, event, ...)
     local CodeName = Data[1]
     local PlayerGui = player:WaitForChild("PlayerGui")
     local MainUI = PlayerGui:WaitForChild("MainUI")
-    local PlayerCodes = Modules.DataHandler.GetDataOfSpecificType(player, "Codes")
+    local PlayerCodes = Modules.CoreModules.DataService.GetDataOfSpecificType(player, "Codes")
 
     if not PlayerCodes[CodeName] then
         MainUI.Codes.EnterCode.Text = "INVALID CODE"
@@ -52,9 +53,9 @@ function module:OnServerEvent(player, event, ...)
         task.wait(1)
         MainUI.Codes.EnterCode.Text = ""
     else
-        Modules.DataHandler.UpdateDataOfSpecificType(player, "Codes", {CodeName, "CLAIMED", true})
+        Modules.CoreModules.DataService.UpdateDataOfSpecificType(player, "Codes", {CodeName, "CLAIMED", true})
         for RewardName, Reward in pairs(Rewards) do
-            Modules.DataHandler.UpdateDataOfSpecificType(player, RewardName, {nil, nil, Reward})
+            Modules.CoreModules.DataService.UpdateDataOfSpecificType(player, RewardName, {nil, nil, Reward})
         end
         MainUI.Codes.EnterCode.Text = "CODE CLAIMED"
         task.wait(1)
