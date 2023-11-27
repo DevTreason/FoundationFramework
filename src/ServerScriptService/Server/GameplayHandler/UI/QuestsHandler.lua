@@ -4,18 +4,20 @@ local module = {}
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local ServerScriptService = game:GetService("ServerScriptService")
+
+--/ Variables /--
+local Server = ServerScriptService.Server
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
-end
-
-for _, global in pairs(script.Parent.Parent.Parent:GetChildren()) do
-    if global:IsA("PackageLink") then continue end
-    if global.Name == script.Parent.Parent.Name then continue end
-    Modules[global.Name] = require(global)
-end
+local Modules = {
+    ["CoreModules"] = {
+        ["DataService"] = require(Server.DataHandler.DataService),
+        ["Utilities"] = {
+            ["RequestProfile"] = require(Server.GameplayHandler.Utilities.RequestProfile),
+        },
+    },
+}
 
 --/ Private Variables /--
 
@@ -23,7 +25,7 @@ end
 --/ Private Functions /--
 local function PopulateQuestList()
     Players.PlayerAdded:Connect(function(player)
-        local Profile = Modules.DataHandler.GetProfile(player)
+        local Profile = Modules.CoreModules.DataService.GetProfile(player)
         local Quests = Profile.Data.Quests
         --Modules.DataHandler.UpdateDataOfSpecificType(player, "Money", {nil, nil, 1000})
         local QuestTemplate = ReplicatedStorage.UIElements.QuestTemplate
