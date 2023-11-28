@@ -4,18 +4,14 @@ local module = {}
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local StarterPlayer = game:GetService("StarterPlayer")
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
-end
-
-for _, global in pairs(script.Parent.Parent:GetChildren()) do
-    if global.Name == script.Parent.Name then continue end
-    if global:IsA("PackageLink") then continue end
-    Modules[global.Name] = require(global)
-end
+local Modules = {
+    ["CoreModules"] = {
+        ["NetworkHandler"] = require(StarterPlayer.StarterPlayerScripts.Client.Network.NetworkHandler),
+    }
+}
 
 --/ Private Variables /--
 local Player = Players.LocalPlayer
@@ -23,7 +19,7 @@ local CodeFrame = Player.PlayerGui:WaitForChild("MainUI"):WaitForChild("Codes")
 
 --/ Private Functions /--
 local function TryCode(Code)
-    Modules.NetworkHandler.InvokeServer("TryCode", Code)
+    Modules.CoreModules.NetworkHandler.InvokeServer("TryCode", Code)
 end
 
 local function CodeInputListener()

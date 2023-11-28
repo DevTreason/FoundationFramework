@@ -108,7 +108,7 @@ function module:OnServerEvent(player, event, ...)
             if not QuestData.REWARDS_CLAIMED then
                 QuestData.REWARDS_CLAIMED = true
                 for RewardName, Reward in pairs(QuestData.REWARDS) do
-                    Modules.CoreModules.DataService.UpdateDataOfSpecificType(player, RewardName, {nil, nil, Reward})
+                    Modules.CoreModules.DataService.AddDataToSpecificType(player, RewardName, Reward)
                 end
             end
         end

@@ -23,8 +23,5 @@ local Modules = {
 
 
 --/ Public Functions /--
-function module:Start()
-    
-end
 
 return module

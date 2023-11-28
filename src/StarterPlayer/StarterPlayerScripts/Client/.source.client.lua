@@ -1,13 +1,13 @@
 --/ Services /--
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local StarterPlayer = game:GetService("StarterPlayer")
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    if module:IsA("PackageLink") then continue end
-    Modules[module.Name] = require(module)
-end
+local Modules = {
+    ["GameplayHandler"] = require(StarterPlayer.StarterPlayerScripts.Client.GameplayHandler),
+    ["NetworkHandler"] = require(StarterPlayer.StarterPlayerScripts.Client.Network.NetworkHandler),
+}
 
 --/ Private Variables /--
 

@@ -64,19 +64,24 @@ function module.GetDataOfSpecificType(player, dataType)
     end
 end
 
-function module.UpdateDataOfSpecificType(player, dataType, data)
+function module.AddDataToSpecificType(player: Player, dataType : string, data : any)
     local Profile = Profiles[player]
-    local Name = data[1]
-    local Type = data[2]
-    local Amount = data[3]
     if Profile then
-        if typeof(Amount) == "number" and not Type and not Name then
-            Profile.Data[dataType] += Amount
-        elseif typeof(Amount) == "number" and Type then
-            Profile.Data[dataType][Type] += Amount
-        elseif typeof(Amount) == "boolean" then
-            Profile.Data[dataType][Name][Type] = Amount
-        end
+        Profile.Data[dataType] += data
+    end
+end
+
+function module.SetDataOfSpecificType(player : Player, dataType : string, data : any)
+    local Profile = Profiles[player]
+    if Profile then
+        Profile.Data[dataType] = data
+    end
+end
+
+function module.UpdateSubDataOfSpecificType(player : Player, dataType : string, subDataType : string, valueToUpdate : string, data : any)
+    local Profile = Profiles[player]
+    if Profile then
+        Profile.Data[dataType][subDataType][valueToUpdate] = data
     end
 end
 
@@ -84,7 +89,5 @@ function module:Start()
     Players.PlayerAdded:Connect(PlayerAdded)
     Players.PlayerRemoving:Connect(PlayerRemoving)
 end
-
-
 
 return module

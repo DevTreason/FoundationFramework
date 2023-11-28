@@ -51,9 +51,9 @@ function module:OnServerEvent(player, event, ...)
         task.wait(1)
         MainUI.Codes.EnterCode.Text = ""
     else
-        Modules.CoreModules.DataService.UpdateDataOfSpecificType(player, "Codes", {CodeName, "CLAIMED", true})
+        Modules.CoreModules.DataService.UpdateSubDataOfSpecificType(player, "Codes", CodeName, "CLAIMED", true)
         for RewardName, Reward in pairs(Rewards) do
-            Modules.CoreModules.DataService.UpdateDataOfSpecificType(player, RewardName, {nil, nil, Reward})
+            Modules.CoreModules.DataService.AddDataToSpecificType(player, RewardName, Reward)
         end
         MainUI.Codes.EnterCode.Text = "CODE CLAIMED"
         task.wait(1)

@@ -3,12 +3,14 @@ local module = {}
 --/ Services /--
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local StarterPlayer = game:GetService("StarterPlayer")
 
 --/ Modules /--
-local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
-end
+local Modules = {
+    ["Packages"] = {
+        ["UIHandler"] = require(StarterPlayer.StarterPlayerScripts.Client.GameplayHandler.Packages.UIHandler),
+    }
+}
 
 --/ Private Variables /--
 

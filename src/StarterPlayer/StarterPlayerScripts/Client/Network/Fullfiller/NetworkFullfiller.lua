@@ -4,11 +4,12 @@ local module = {}
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local StarterPlayer = game:GetService("StarterPlayer")
 
 --/ Modules /--
 local Modules = {}
-for _, module in pairs(script:GetChildren()) do
-    Modules[module.Name] = require(module)
+for _, fullfillmentModule in StarterPlayer.StarterPlayerScripts.Client.Network.Fullfillments:GetChildren() do
+    Modules[fullfillmentModule.Name] = require(fullfillmentModule)
 end
 
 --/ Private Variables /--
